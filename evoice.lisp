@@ -2,15 +2,15 @@
   `(add-hook
    'post-self-insert-hook
    (lambda ()
-         (if (search-backward ,key nil t)
+         (if (search-backward ,key (line-beginning-position) t)
                  ((lambda ()
                         (delete-char (length ,key))
-                        ,action
+                        (call-interactively (global-key-binding ,action))
                         ))
            )
          )
    )
   )
 
-(replace-key "line begin" (move-beginning-of-line 1))
-(replace-key "delete line" (kill-line))
+(replace-key " aa" "\C-a")
+(replace-key " kk" "\C-k")
